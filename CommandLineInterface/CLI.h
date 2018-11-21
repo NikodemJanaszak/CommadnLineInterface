@@ -13,18 +13,26 @@
 
 using namespace std;
 
+enum INPUTS{
+	HELP, CD, DIR, PS
+
+};
+
 class CLI{
 public:
 	CLI();
 	~CLI();
 	void printLine(string userInput);
 	void ShowConsoleCursor(bool showFlag);
+	INPUTS inputs(string userInput);
 	void printResult(string result);
+	void printHelp();
 	void changeDirectory(string parameter);
 	string currentPath();
 	vector<string> splitString(string toSplit);
 	void dir();
 	void ps();
+
 
 private:
 
