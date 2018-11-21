@@ -7,16 +7,14 @@
 #include <vector>
 #include <sstream>
 #include <regex>
+#include <stdio.h>
 
 using namespace std;
 
 CLI::CLI() {
+
 	cout << "Command Line Interface 1.0 " << endl << "(c)2018 PUT students. All rights reserved." << endl << endl;
 	cout << currentPath();
-	string userInput = "";
-	string firstArgument = "";
-	string secondArgument = "";
-	string thirdArgument = "";
 
 	while (true) {
 		ShowConsoleCursor(true);
@@ -26,7 +24,7 @@ CLI::CLI() {
 			cout << currentPath();
 			continue;
 		}
-		vector<string> splitResult = splitString(userInput);
+		splitResult = splitString(userInput);
 
 		userInput = splitResult[0];
 		if (splitResult.size() == 2) {
@@ -39,8 +37,7 @@ CLI::CLI() {
 			thirdArgument = splitResult[3];
 		}
 
-		switch (inputs(userInput))
-		{
+		switch (inputs(userInput)) {
 		case HELP:
 			printHelp();
 			break;
@@ -48,15 +45,23 @@ CLI::CLI() {
 			changeDirectory(firstArgument);
 			break;
 		case DIR:
+			dir();
 			break;
 		case PS:
+			ps();
+			break;
+		case EXIT:
+			if (askExit()) goto closer;
 			break;
 		default:
 			printResult("Nie ma takiego polecenia");
 			break;
 		}
-
 	}
+closer:
+	printf("Zamykanie systemu... ");
+	counter();
+
 }
 
 CLI::~CLI() {}
@@ -91,6 +96,7 @@ INPUTS CLI::inputs(string input) {
 	else if (input == "cd") return CD;
 	else if (input == "dir") return DIR;
 	else if (input == "ps") return PS;
+	else if (input == "exit") return EXIT;
 }
 
 void CLI::printLine(string userInput) {
@@ -125,4 +131,21 @@ void CLI::dir() {
 void CLI::ps() {
 	system("tasklist");
 	printResult("");
+}
+
+int CLI::askExit() {
+	char ask;
+	cout << "Czy na pewno chcesz zamknac system? (t/n): ";
+	cin >> ask;
+	if (ask == 't') return 1;
+	else return 0;
+}
+
+void CLI::counter() {
+	for (int i = 3; i >= 1; i--)
+	{
+		cout << " " << i;
+		Sleep(1000);
+	}
+	
 }

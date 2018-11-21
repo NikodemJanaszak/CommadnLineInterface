@@ -14,12 +14,17 @@
 using namespace std;
 
 enum INPUTS{
-	HELP, CD, DIR, PS
-
+	HELP, CD, DIR, PS, EXIT
 };
 
 class CLI{
 public:
+	string userInput = "";
+	string firstArgument = "";
+	string secondArgument = "";
+	string thirdArgument = "";
+	vector<string> splitResult;
+
 	CLI();
 	~CLI();
 	void printLine(string userInput);
@@ -32,8 +37,8 @@ public:
 	vector<string> splitString(string toSplit);
 	void dir();
 	void ps();
-
-
+	int askExit();
+	void counter();
 private:
 
 };
