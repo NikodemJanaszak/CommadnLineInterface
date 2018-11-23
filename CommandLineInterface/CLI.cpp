@@ -47,8 +47,11 @@ CLI::CLI() {
 		case DIR:
 			dir();
 			break;
-		case PS:
-			ps();
+		case TASKS:
+			tasks();
+			break;
+		case MYLOG:
+				mylog();
 			break;
 		case EXIT:
 			if (askExit()) goto closer;
@@ -95,7 +98,8 @@ INPUTS CLI::inputs(string input) {
 	if (input == "help") return HELP;
 	else if (input == "cd") return CD;
 	else if (input == "dir") return DIR;
-	else if (input == "ps") return PS;
+	else if (input == "tasks") return TASKS;
+	else if (input == "mylog") return MYLOG;
 	else if (input == "exit") return EXIT;
 }
 
@@ -128,8 +132,13 @@ void CLI::dir() {
 	printResult("");
 }
 
-void CLI::ps() {
+void CLI::tasks() {
 	system("tasklist");
+	printResult("");
+}
+
+void CLI::mylog() {
+	system("echo %USERNAME%");
 	printResult("");
 }
 

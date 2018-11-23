@@ -14,7 +14,7 @@
 using namespace std;
 
 enum INPUTS{
-	HELP, CD, DIR, PS, EXIT
+	HELP, CD, DIR, TASKS, MYLOG, EXIT
 };
 
 class CLI{
@@ -36,7 +36,8 @@ public:
 	string currentPath();
 	vector<string> splitString(string toSplit);
 	void dir();
-	void ps();
+	void tasks();
+	void mylog();
 	int askExit();
 	void counter();
 private:
